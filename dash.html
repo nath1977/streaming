@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Arqiva demo</title>
+
+    <!-- dash.js should be always called BEFORE the System73 SDK dependencies -->
+    <script
+      src="//cdn.dashjs.org/latest/dash.all.min.js"
+      type="application/javascript"
+    ></script>
+
+    <!-- dash.js and System73 SDK dependencies should be always called BEFORE the video tag. -->
+    <script
+      src="//cdn.s73cloud.com/4/s73-sdk-dashjs.js"
+      type="application/javascript"
+    ></script>
+  </head>
+  <body>
+    <img
+      width="200"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Arqiva_Logo.svg/320px-Arqiva_Logo.svg.png"
+    />
+    <h1 style="font-family: verdana">CDN test page (Live DASH)</h1>
+    <h2 style="font-family: verdana" id="mode">Select a play mode...</h2>
+    <button id="Button1">Play with P2P</button>
+    <button id="Button2">Play without P2P</button>
+    <p>
+      <video id="video" width="800" controls muted></video>
+
+      <script>
+        document.getElementById("Button1").onclick = function () {
+          document.getElementById("mode").innerText = "P2P Enabled"; // set the page heading text
+          document.getElementById("mode").style.color = "green";
+
+          var player = dashjs.MediaPlayer().create();
+          var s73SdkConfig = {
+            apiKey:
+              "eyJoYXNoZWRfa2V5IjoiMWRsTzVTZ010SmZRaXFOdFVyb2NTTThsUGZoRmhaYVFKRklmMTV5ZElOOCIsInNpZ25hbF9zZXJ2ZXJfdXJsIjoid3NzOlwvXC9lbWVhLnM3M2Nsb3VkLmNvbTo0NDNcL3dzIiwic3R1bl9zZXJ2ZXJfdXJsIjpbInN0dW46c3R1bi1lbWVhLTAxLnM3M2Nsb3VkLmNvbTozNDc4Iiwic3R1bjpzdHVuLWVtZWEtMDIuczczY2xvdWQuY29tOjM0NzgiXSwibWV0cmljX3NpbmtfdXJsIjoiaHR0cHM6XC9cL2VtZWEuczczY2xvdWQuY29tOjQ0M1wvbWV0cmljc1wvdjEifQ", // mandatory
+            contentSteering: "<YOUR_CONTENT_STEERING_RESOURCE>", // optional
+            channelId: "BBC test card DASH", // optional
+            debug: 'info',
+          };
+          var wrapper = S73DashjsWrapper(s73SdkConfig);
+          wrapper.wrapPlayer(player);
+          wrapper.p2p.enable();
+
+          player.initialize(
+            document.querySelector("#video"),
+            "https://rdmedia.bbc.co.uk/testcard/simulcast/manifests/avc-full.mpd",
+            true
+          );
+        };
+      </script>
+      <script>
+        document.getElementById("Button2").onclick = function () {
+          document.getElementById("mode").innerText = "P2P Disabled"; // set the page heading text
+          document.getElementById("mode").style.color = "red";
+
+          var player = dashjs.MediaPlayer().create();
+          var s73SdkConfig = {
+            apiKey:
+              "eyJoYXNoZWRfa2V5IjoiMWRsTzVTZ010SmZRaXFOdFVyb2NTTThsUGZoRmhaYVFKRklmMTV5ZElOOCIsInNpZ25hbF9zZXJ2ZXJfdXJsIjoid3NzOlwvXC9lbWVhLnM3M2Nsb3VkLmNvbTo0NDNcL3dzIiwic3R1bl9zZXJ2ZXJfdXJsIjpbInN0dW46c3R1bi1lbWVhLTAxLnM3M2Nsb3VkLmNvbTozNDc4Iiwic3R1bjpzdHVuLWVtZWEtMDIuczczY2xvdWQuY29tOjM0NzgiXSwibWV0cmljX3NpbmtfdXJsIjoiaHR0cHM6XC9cL2VtZWEuczczY2xvdWQuY29tOjQ0M1wvbWV0cmljc1wvdjEifQ", // mandatory
+            contentSteering: "<YOUR_CONTENT_STEERING_RESOURCE>", // optional
+            channelId: "BBC test card DASH", // optional
+            debug: 'info',
+          };
+          var wrapper = S73DashjsWrapper(s73SdkConfig);
+          wrapper.wrapPlayer(player);
+          wrapper.p2p.disable();
+
+          player.initialize(
+            document.querySelector("#video"),
+            "https://rdmedia.bbc.co.uk/testcard/simulcast/manifests/avc-full.mpd",
+            true
+          );
+        };
+      </script>
+    </p>
+  </body>
+</html>
