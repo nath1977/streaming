@@ -27,7 +27,7 @@
     <button id="Button2">Play without P2P</button>
     <p>
       <video id="video" width="800" controls muted></video>
-
+    <h3 style="font-family: verdana">Debug messages enabled - see Info level in developer console</h1>
       <script>
         document.getElementById("Button1").onclick = function () {
           document.getElementById("mode").innerText = "P2P Enabled"; // set the page heading text
@@ -62,7 +62,7 @@
             apiKey:
               "eyJoYXNoZWRfa2V5IjoiMWRsTzVTZ010SmZRaXFOdFVyb2NTTThsUGZoRmhaYVFKRklmMTV5ZElOOCIsInNpZ25hbF9zZXJ2ZXJfdXJsIjoid3NzOlwvXC9lbWVhLnM3M2Nsb3VkLmNvbTo0NDNcL3dzIiwic3R1bl9zZXJ2ZXJfdXJsIjpbInN0dW46c3R1bi1lbWVhLTAxLnM3M2Nsb3VkLmNvbTozNDc4Iiwic3R1bjpzdHVuLWVtZWEtMDIuczczY2xvdWQuY29tOjM0NzgiXSwibWV0cmljX3NpbmtfdXJsIjoiaHR0cHM6XC9cL2VtZWEuczczY2xvdWQuY29tOjQ0M1wvbWV0cmljc1wvdjEifQ", // mandatory
             contentSteering: "<YOUR_CONTENT_STEERING_RESOURCE>", // optional
-            channelId: "BBC test card DASH", // optional
+            channelId: "Colour Bars Live DASH", // optional
             debug: 'info',
           };
           var wrapper = S73DashjsWrapper(s73SdkConfig);
@@ -71,7 +71,7 @@
 
           player.initialize(
             document.querySelector("#video"),
-            "https://rdmedia.bbc.co.uk/testcard/simulcast/manifests/avc-full.mpd",
+            "https://livesim2.dashif.org/livesim2/testpic_2s/Manifest.mpd",
             true
           );
         };
