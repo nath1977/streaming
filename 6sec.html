@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Arqiva demo</title>
+
+    <!-- dash.js should be always called BEFORE the System73 SDK dependencies -->
+    <script
+      src="//cdn.dashjs.org/latest/dash.all.min.js"
+      type="application/javascript"
+    ></script>
+
+    <!-- dash.js and System73 SDK dependencies should be always called BEFORE the video tag. -->
+    <script
+      src="//cdn.s73cloud.com/4/s73-sdk-dashjs.js"
+      type="application/javascript"
+    ></script>
+  </head>
+  <body>
+    <img
+      width="200"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Arqiva_Logo.svg/320px-Arqiva_Logo.svg.png"
+    />
+    <h1 style="font-family: verdana">Analytics and Delivery Optimisation demo page (dash.js)</h1>
+    <h2 style="font-family: verdana" id="mode">6 second chunks...</h2>
+
+    <p>
+      <video id="video" width="800" controls muted></video>
+    <p>
+      Debug messages enabled - see Info level in developer console
+      <script>
+
+          var player = dashjs.MediaPlayer().create();
+
+          var s73SdkConfig = {
+            apiKey:
+              "eyJoYXNoZWRfa2V5IjoiMWRsTzVTZ010SmZRaXFOdFVyb2NTTThsUGZoRmhaYVFKRklmMTV5ZElOOCIsInNpZ25hbF9zZXJ2ZXJfdXJsIjoid3NzOlwvXC9lbWVhLnM3M2Nsb3VkLmNvbTo0NDNcL3dzIiwic3R1bl9zZXJ2ZXJfdXJsIjpbInN0dW46c3R1bi1lbWVhLTAxLnM3M2Nsb3VkLmNvbTozNDc4Iiwic3R1bjpzdHVuLWVtZWEtMDIuczczY2xvdWQuY29tOjM0NzgiXSwibWV0cmljX3NpbmtfdXJsIjoiaHR0cHM6XC9cL2VtZWEuczczY2xvdWQuY29tOjQ0M1wvbWV0cmljc1wvdjEifQ", // mandatory
+            contentSteering: "<YOUR_CONTENT_STEERING_RESOURCE>", // optional
+            channelId: "6 second test card DASH", // optional
+            debug: 'info',
+          };
+          var wrapper = S73DashjsWrapper(s73SdkConfig);
+          wrapper.wrapPlayer(player);
+          wrapper.p2p.enable();
+
+          player.initialize(
+            document.querySelector("#video"),
+            "https://livesim2.dashif.org/livesim2/testpic_6s/Manifest.mpd",
+            true
+          );
+        };
+      </script>
+    </p>
+  </body>
+</html>
